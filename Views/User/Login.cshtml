@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_MyLayout.cshtml";
+}
+
+<div class="row">
+    <form class="form-horizontal" action="/User/Login" method="post" style="margin-top: 90px; margin-left: 255px">
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="txtUsername">ID:</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="txtUsername" name="username">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="txtPassword">Password:</label>
+            <div class="col-sm-4">
+                <input type="password" class="form-control" id="txtPassword" name="password">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default">Login</button>
+            </div>
+        </div>
+    </form>
+</div>
+

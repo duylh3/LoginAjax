@@ -1,0 +1,119 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hệ thống quản lí ý kiến nhân viên</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    @*<script src="~/Scripts/plugins/mustache.min.js"></script>
+    <script src="~/Scripts/app/controller/questionjs.js"></script>
+    <script src="~/Scripts/app/controller/searchjs.js"></script>*@
+    @*<style>
+        #background {
+            background: url(/Resources/images/background1.jpg) no-repeat 50% 50% fixed;
+            background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            -webkit-background-size: cover;
+        }
+    </style>*@
+</head>
+<body>
+    <div class="row" style="margin-right:0px">
+        <img src="~/Resources/images/posco_2.png" class="img-header" style="width:100%; height: 500px" />
+    </div>
+    <div class="row" style="padding-top:5px; margin-right:0px;">
+        <div class="col-sm-4 col-md-3">
+            <form class="form-inline" id="formSearch" method="post">
+                <div class="col-sm-12 input-group mb-1">
+                    <input type="text" class="form-control" id="txtSearch" placeholder="Tìm kiếm" aria-describedby="button-addon2" style="max-width:249px">
+                    <div class="input-group-append" style="margin-left: 1px">
+                        <button class="btn btn-primary" type="button" id="btnSearch"><span class="fa fa-search"></span></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-sm-8 col-md-9">
+            @{
+                var session = Session["Username"];
+            }
+            @if (session == null)
+            {
+                <form class="form-inline" id="formLogin" method="post" action="~/User/Login" style="float:right">
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" name="username" placeholder="Tên đăng nhập" />
+                    </div>
+                    <div class="col-sm-4">
+                        <input type="password" class="form-control" name="password" placeholder="Mật khẩu" />
+                    </div>
+                    <div class="col-sm-4">
+                        <button class="btn btn-primary" type="submit" id="btnLogin">Đăng nhập</button>
+                    </div>
+                </form>
+            }
+            else
+            {
+                <div class="row col-sm-6 col-md-8" style="margin-left:3px">
+                    Welcome: <strong> &nbsp @session || </strong>
+                    <form id="myForm" action="~/User/Logout" method="post">
+                        <input type="submit" value="Logout" class="btn btn-link" style="padding-top:0px" />
+                    </form>
+
+                    <div class="col-md-2">
+                        <a href="~/QA/SendFeedback">Gởi câu hỏi</a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="~/QA/SendFeedback">Thống kê câu hỏi</a>
+                    </div>
+                </div>
+            }
+
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    <div class="row" style="margin-left:0px; margin-right:0px">
+        <div class="col-sm-4 col-md-3">
+            <div class="list-group">
+                <a href="#" class="list-group-item list-group-item-action list-group-item-primary"><strong style="font-size:larger">I. Q&A/VOC của nhân viên</strong></a>
+                <a href="~/QA/CauHoi" class="list-group-item list-group-item-action list-group-item-primary" id="HR"><strong> Câu hỏi liên quan nhân sự </strong><span class="badge badge-light"> 6</span></a>
+                <a href="~/QA/CauHoi" class="list-group-item list-group-item-action list-group-item-primary" id="Salary"> - Tiền lương</a>
+                <a href="~/QA/CauHoi" class="list-group-item list-group-item-action list-group-item-primary" id="WokingTime"> - Chấm công</a>
+                <a href="~/QA/CauHoi" class="list-group-item list-group-item-action list-group-item-primary" id="OT"> - Tăng ca</a>
+                <a href="~/QA/CauHoi" class="list-group-item list-group-item-action list-group-item-primary" id="Eva"> - Đánh giá</a>
+                <a href="~/QA/CauHoi" class="list-group-item list-group-item-action list-group-item-primary" id="Insurrance"> - Bảo hiểm</a>
+                <a href="~/QA/CauHoi" class="list-group-item list-group-item-action list-group-item-primary" id="Other"> - Khác</a>
+                <a href="~/QA/CauHoi" class="list-group-item list-group-item-action list-group-item-primary" id="Welfare"><strong> Câu hỏi liên quan phúc lợi </strong></a>
+                <a href="~/QA/CauHoi" class="list-group-item list-group-item-action list-group-item-primary" id="Rule"><strong> Khai báo vi phạm chuẩn mực đạo đức </strong></a>
+                <a href="~/QA/CauHoi" class="list-group-item list-group-item-action list-group-item-primary" id="Hard"><strong> Khó khăn của nhân viên </strong></a>
+                <a href="~/QA/CauHoi" class="list-group-item list-group-item-action list-group-item-primary" id="QOther"><strong> Các câu hỏi liên quan khác </strong></a>
+
+                <a href="#" class="list-group-item list-group-item-action list-group-item-primary"><strong style="font-size:larger">I. Tài liệu tham khảo</strong></a>
+                <a href="~/Document/ThamKhao" class="list-group-item list-group-item-action list-group-item-primary" id="Law"><strong> Pháp luật Việt Nam </strong><span class="badge badge-light"> 3</span></a>
+                <a href="~/Document/ThamKhao" class="list-group-item list-group-item-action list-group-item-primary" id="Labor"> - Luật lao động</a>
+                <a href="~/Document/ThamKhao" class="list-group-item list-group-item-action list-group-item-primary" id="RuleInsurrance"> - Luật bảo hiểm</a>
+                <a href="~/Document/ThamKhao" class="list-group-item list-group-item-action list-group-item-primary" id="RuleTax"> - Luật thuế</a>
+                <a href="~/Document/ThamKhao" class="list-group-item list-group-item-action list-group-item-primary" id="RuleCompany"><strong> Quy định công ty </strong><span class="badge badge-light"> 4</span></a>
+                <a href="~/Document/ThamKhao" class="list-group-item list-group-item-action list-group-item-primary" id="RuleHR"> - Quy định nhân sự</a>
+                <a href="~/Document/ThamKhao" class="list-group-item list-group-item-action list-group-item-primary" id="RuleSafety"> - Quy định an toàn</a>
+                <a href="~/Document/ThamKhao" class="list-group-item list-group-item-action list-group-item-primary" id="RuleSercurityInfo"> - Quy định bảo mật thông tin</a>
+                <a href="~/Document/ThamKhao" class="list-group-item list-group-item-action list-group-item-primary" id="RuleEthic"> - Quy định chuẩn mực đạo đức</a>
+            </div>
+        </div>
+        <div class="col-sm-8 col-md-9">
+            @RenderBody()
+        </div>
+        <hr />
+        @*<footer class="row col-md-12">
+                <p>&copy; @DateTime.Now.Year - POSCO VST</p>
+            </footer>*@
+    </div>
+
+    @*@Scripts.Render("~/bundles/jquery")*@
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

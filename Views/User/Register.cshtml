@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-md-12">
+    <h4>Đăng kí user</h4>
+    <form id="formRegister" method="post" action="/User/Register">
+        <div class="form-group">
+            <label for="txtUsername">Username</label>
+            <input type="text" class="form-control" id="txtUsername" name="username">
+        </div>
+        <div class="form-group">
+            <label for="txtPassword">Password:</label>
+            <input type="password" class="form-control" id="txtPassword" name="password">
+        </div>
+        <input type="submit" class="btn btn-primary" id="btnRegister" value="Register"/>
+    </form>
+</div>

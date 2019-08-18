@@ -1,0 +1,193 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="IdealDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="tb_Answers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="QuestionId" Type="Int32" Nullable="false" />
+    <Property Name="Answer" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IsDeleted" Type="Int32" Nullable="false" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedBy" Type="Int32" />
+    <Property Name="ModifiedDate" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+  </EntityType>
+  <EntityType Name="tb_Categories">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CategoryName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="ParentId" Type="Int32" />
+    <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IsDeleted" Type="Int32" Nullable="false" />
+    <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ModifiedDate" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+  </EntityType>
+  <EntityType Name="tb_Document">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CategoryId" Type="Int32" Nullable="false" />
+    <Property Name="DocumentName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Url" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IsDeleted" Type="Int32" Nullable="false" />
+    <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ModifiedDate" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+  </EntityType>
+  <EntityType Name="tb_Employee">
+    <Key>
+      <PropertyRef Name="EMP_ID" />
+    </Key>
+    <Property Name="EMP_ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="WORKGROUP" Type="String" MaxLength="40" FixedLength="true" Unicode="false" />
+    <Property Name="ENTER_DATE" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="tb_Questions">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CategoryId" Type="Int32" Nullable="false" />
+    <Property Name="Question" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IsDeleted" Type="Int32" Nullable="false" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="ModifiedDate" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+    <Property Name="ModifiedBy" Type="Int32" />
+  </EntityType>
+  <EntityType Name="tb_User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IsDeleted" Type="Int32" Nullable="false" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedBy" Type="Int32" />
+    <Property Name="ModifiedDate" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+  </EntityType>
+  <EntityContainer Name="IdealDbEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tb_Answers" EntityType="Self.tb_Answers" />
+    <EntitySet Name="tb_Categories" EntityType="Self.tb_Categories" />
+    <EntitySet Name="tb_Document" EntityType="Self.tb_Document" />
+    <EntitySet Name="tb_Employee" EntityType="Self.tb_Employee" />
+    <EntitySet Name="tb_Questions" EntityType="Self.tb_Questions" />
+    <EntitySet Name="tb_User" EntityType="Self.tb_User" />
+    <FunctionImport Name="GetAnswer" ReturnType="Collection(IdealDbModel.GetAnswer_Result)">
+      <Parameter Name="questionId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetDocumentDetail" ReturnType="Collection(IdealDbModel.GetDocumentDetail_Result)">
+      <Parameter Name="Id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetDocumentList" ReturnType="Collection(IdealDbModel.GetDocumentList_Result)">
+      <Parameter Name="Category" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="GetHistory" ReturnType="Collection(IdealDbModel.GetHistory_Result)" />
+    <FunctionImport Name="GetList" ReturnType="Collection(IdealDbModel.GetList_Result)">
+      <Parameter Name="page" Mode="In" Type="Int32" />
+      <Parameter Name="pageSize" Mode="In" Type="Int32" />
+      <Parameter Name="Caregory" Mode="In" Type="String" />
+      <Parameter Name="RowNum" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetQuestionById" ReturnType="Collection(IdealDbModel.GetQuestionById_Result)">
+      <Parameter Name="CategoryId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetQuestionList" ReturnType="Collection(IdealDbModel.GetQuestionList_Result)">
+      <Parameter Name="Category" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="InsertQuestion">
+      <Parameter Name="CategoryId" Mode="In" Type="Int32" />
+      <Parameter Name="Question" Mode="In" Type="String" />
+      <Parameter Name="CreatedBy" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="InsertUser">
+      <Parameter Name="Username" Mode="In" Type="String" />
+      <Parameter Name="Password" Mode="In" Type="String" />
+      <Parameter Name="CreatedBy" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="SearchQuestion" ReturnType="Collection(IdealDbModel.SearchQuestion_Result)">
+      <Parameter Name="KeySearch" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="UserLogin" ReturnType="Collection(IdealDbModel.UserLogin_Result)">
+      <Parameter Name="Username" Mode="In" Type="String" />
+      <Parameter Name="Password" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="GetAnswer_Result">
+    <Property Type="String" Name="Question" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="CreatedBy" Nullable="true" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="Answer" Nullable="true" MaxLength="500" />
+  </ComplexType>
+  <ComplexType Name="GetDocumentDetail_Result">
+    <Property Type="String" Name="DocumentName" Nullable="false" MaxLength="150" />
+    <Property Type="String" Name="Url" Nullable="false" MaxLength="250" />
+    <Property Type="String" Name="CreatedBy" Nullable="true" MaxLength="50" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="GetDocumentList_Result">
+    <Property Type="String" Name="CreatedBy" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="DocumentName" Nullable="false" MaxLength="150" />
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Category" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Url" Nullable="false" MaxLength="250" />
+    <Property Type="String" Name="Username" Nullable="true" MaxLength="150" />
+    <Property Type="String" Name="CategoryName" Nullable="true" MaxLength="150" />
+  </ComplexType>
+  <ComplexType Name="GetHistory_Result">
+    <Property Type="String" Name="Question" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="EMP_ID" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="NAME" Nullable="true" MaxLength="50" />
+    <Property Type="DateTime" Name="ENTER_DATE" Nullable="true" />
+    <Property Type="String" Name="WORKGROUP" Nullable="true" MaxLength="40" />
+  </ComplexType>
+  <ComplexType Name="GetList_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Question" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="CreatedBy" Nullable="true" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="Category" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="GetQuestionById_Result">
+    <Property Type="Int32" Name="CreatedBy" Nullable="true" />
+    <Property Type="String" Name="Question" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Username" Nullable="true" MaxLength="150" />
+    <Property Type="String" Name="EMP_ID" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="CategoryName" Nullable="true" MaxLength="150" />
+  </ComplexType>
+  <ComplexType Name="GetQuestionList_Result">
+    <Property Type="Int32" Name="CreatedBy" Nullable="true" />
+    <Property Type="String" Name="Question" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Category" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Username" Nullable="false" MaxLength="150" />
+    <Property Type="String" Name="EMP_ID" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="CategoryName" Nullable="true" MaxLength="150" />
+  </ComplexType>
+  <ComplexType Name="SearchQuestion_Result">
+    <Property Type="String" Name="Question" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="CreatedBy" Nullable="true" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="Category" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="CategoryName" Nullable="true" MaxLength="150" />
+    <Property Type="String" Name="Username" Nullable="true" MaxLength="150" />
+  </ComplexType>
+  <ComplexType Name="UserLogin_Result">
+    <Property Type="String" Name="Username" Nullable="false" MaxLength="150" />
+    <Property Type="Int32" Name="Id" Nullable="false" />
+  </ComplexType>
+</Schema>

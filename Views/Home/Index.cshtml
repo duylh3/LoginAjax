@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+@section Scripts{
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    @*<script src="~/Scripts/app/controller/questionjs.js"></script>*@
+    <script src="~/Scripts/app/controller/searchjs.js"></script>
+}
+
+<div class="row" style="padding-top:30px">
+    <div class="col-md-8">
+        @if (Session["Username"] == null)
+        {
+            <div class="alert alert-primary" role="alert">
+                Đăng nhập để gởi ý kiến/câu hỏi về cho chúng tôi
+            </div>
+        }
+        else
+        {
+            <form method="post" action="/ideal/QA/SendFeedback">
+                <select class="form-control col-md-12" id="listCategory" name="category" style="margin-bottom:10px"></select>
+                <textarea class="form-control col-md-12" name="content" id="txtFeedback" rows="10" cols="170" placeholder="Bạn hãy nhập nội dung cụ thể vào đây"></textarea>
+                <button type="submit" class="btn btn-outline-primary" id="btnSendEmail" style="float:right; margin-top: 5px;"> Đăng kí/Gởi </button>
+            </form>
+        }
+    </div>
+</div>

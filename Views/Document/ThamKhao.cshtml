@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewBag.Title = "ThamKhao";
+    Layout = "~/Views/Shared/_MyLayout.cshtml";
+}
+
+@section Scripts{
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/plugins/mustache.min.js"></script>
+    <script src="~/Scripts/jquery.twbsPagination.min.js"></script>
+    <script src="~/Scripts/app/controller/documentjs.js"></script>
+    @*<script src="~/Scripts/app/controller/questionjs.js"></script>*@
+}
+
+<div class="row" style="padding-top: 26px">
+    <h4 style="margin-left:2px" id="categoryName"></h4>
+
+    <table class="table table-striped table-bordered" style="width:98%; margin-left:2px">
+        @*<thead>
+                <tr>
+                    <th>#</th>
+                    <th>Tham khảo</th>
+                    <th>Chuyên mục</th>
+                    <th>Người tạo</th>
+                    <th>Nội dung</th>
+                </tr>
+            </thead>*@
+        <tbody id="tbl-content"></tbody>
+    </table>
+    @*<div id="pagination" class="pagination">
+
+    </div>*@
+</div>
+
+@Html.Partial("~/Views/Document/_NoiDung.cshtml")
+
+<script id="table-template" type="x-tmpl-mustache">
+    <tr>
+        <td class="col-seq" style="width:4%">{{Sequence}}</td>
+        <td>{{{DocumentName}}}</td>
+        @*<td>{{CategoryName}}</td>
+            <td>{{Username}}</td>*@
+        <td class="text-center" scope="row" style="width:10%">
+            <button class="btn btn-link btnDetail" data-id="{{Id}}">Nội dung </button>
+        </td>
+    </tr>
+</script>
+
